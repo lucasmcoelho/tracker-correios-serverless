@@ -20,6 +20,17 @@ npm install
 ```
 npm start
 ```
+## Usage
+- GET request
+```
+http://localhost:8787/consultar/{TRACK-NUMBER}
+```
+
+## Example
+
+https://tracker-correios-serverless.lucasmcoelho.workers.dev/consultar/NX781526297BR
+
+
 ## 📝 License
 
 This project lives under MIT License. See [LICENSE](LICENSE.md) for more details.
