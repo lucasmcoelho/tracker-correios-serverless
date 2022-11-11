@@ -8,23 +8,37 @@ routes.add('GET', 'consultar/:cod', async (req, res) => {
 
   const result = async (codigo: string) => {
 
-    const data = "<rastroObjeto>\n" +
-      "<usuario>{}</usuario>\n" +
-      "<senha>{}</senha>\n" +
-      "<tipo>L</tipo>\n" +
-      "<resultado>T</resultado>\n" +
-      "<objetos>" + codigo + "</objetos>\n" +
-      "<lingua>101</lingua>\n" +
-      "<token>{}</token>\n" +
-      "</rastroObjeto>";
-
-    const response = await fetch("http://webservice.correios.com.br/service/rest/rastro/rastroMobile", {
+    const app_token: any = await fetch("https://proxyapp.correios.com.br/v1/app-validation", {
       method: "POST",
-      headers: { "Content-Type": "application/xml; charset=UTF-8" },
-      body: data
-    })
-    .then((data) => { return data.json() })
-    .catch(err => { 
+      headers: { 
+        "Content-Type": "application/json;",
+        "user-agent": "Dart/2.18 (dart:io)",
+      },
+      body: JSON.stringify({ "requestToken": "YW5kcm9pZDtici5jb20uY29ycmVpb3MucHJlYXRlbmRpbWVudG87RjMyRTI5OTc2NzA5MzU5ODU5RTBCOTdGNkY4QTQ4M0I5Qjk1MzU3OA" })
+
+    }).then((data) => { 
+      return data.json(); 
+
+    }).catch(err => {  
+      return null; 
+    });
+
+    if(app_token == null){
+      return res.send(404, {"Error": "Tracker info ERROR. Try again later"});
+    }
+
+    const response = await fetch("https://proxyapp.correios.com.br/v1/sro-rastro/"+codigo, {
+      method: "GET",
+      headers: { 
+        "content-type": "application/json",
+        "user-agent": "Dart/2.18 (dart:io)",
+        "app-check-token": app_token['token'],
+      }
+
+    }).then((data) => { 
+      return data.json() 
+    
+    }).catch(err => { 
       return null;
     });
 
