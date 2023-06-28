@@ -1,3 +1,7 @@
 name = "tracker-correios-serverless"
 main = "src/index.ts"
 compatibility_date = "2022-06-06"
+
+[vars]
+USER = "XXXXXX"
+TOKEN = "XXXXXXXXXXXXXXX"
