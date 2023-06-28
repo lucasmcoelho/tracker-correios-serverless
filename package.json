@@ -1,15 +1,15 @@
 {
   "name": "tracker-correios-serverless",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "devDependencies": {
-    "@cloudflare/workers-types": "^3.11.0",
-    "typescript": "^4.7.3",
-    "wrangler": "^2.2.1"
+    "@cloudflare/workers-types": "^4.20230419.0",
+    "typescript": "^5.0.4",
+    "wrangler": "^3.0.0"
   },
   "private": true,
   "scripts": {
     "start": "wrangler dev",
-    "publish": "wrangler publish"
+    "publish": "wrangler deploy"
   },
   "dependencies": {
     "worktop": "^0.7.3"
