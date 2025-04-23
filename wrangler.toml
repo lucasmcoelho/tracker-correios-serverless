@@ -1,7 +1,0 @@
-name = "tracker-correios-serverless"
-main = "src/index.ts"
-compatibility_date = "2022-06-06"
-
-[vars]
-USER = "2458308@gmail.com"
-TOKEN = "tg0B7dP3iWdiQi6R0TqERcYfT0YJa4e0KRPDxVyV3CI"
