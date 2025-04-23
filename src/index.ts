@@ -3,25 +3,34 @@ import { listen } from "worktop/cache"
 
 const routes = new Router();
 
+interface IResponse {
+  "json": string,
+  "carrier": string,
+}
+
 routes.add('GET', 'consultar/:cod', async (req, res) => {
   const { cod } = req.params;
 
   const result = async (codigo: string) => {
 
-    const response = await fetch("https://api.linketrack.com/track/json?user=" + USER + "&token=" + TOKEN + "&codigo=" + codigo, {
-      method: "GET",
+    const response = await fetch('https://api-labs.wonca.com.br/wonca.labs.v1.LabsService/Track', {
+      method: 'POST',
       headers: {
-        "content-type": "application/json",
-      }
-
+        'Content-Type': 'application/json',
+        'Authorization': `Apikey ${TOKEN}`
+      },
+      body: JSON.stringify({"code": codigo})
     }).then((data) => {
-      return data.json()
+      return data.json() as Promise<IResponse>;
 
     }).catch(err => {
       return null;
     });
 
-    return await response;
+    var n = await response;
+    var res = n?.json;
+
+    return res;
   }
   const rr = await result(cod);
   if (rr != null) {
